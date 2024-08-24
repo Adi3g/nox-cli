@@ -164,10 +164,10 @@ nox file size --path /path/to/directory
 
 ### UUID Generation
 
-Generate a new UUID:
+Generate a new UUID4:
 
 ```bash
-nox uuid generate
+nox gen uuid4
 ```
 
 ### Weather Plugin
