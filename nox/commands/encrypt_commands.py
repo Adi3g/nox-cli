@@ -21,7 +21,7 @@ def encrypt():
     help='Path to the output file',
 )
 @click.option('--key', required=True, help='Path to the encryption key')
-def fernet(text, input, output, key):
+def fernet(text, input, output, key) -> None:
     """Encrypt text or file using Fernet."""
     manager = EncryptionManager(
         input_text=text, input_file=input, key_file=key,
@@ -42,7 +42,7 @@ def fernet(text, input, output, key):
     '--output', type=click.File('wb'),
     help='Path to the output file',
 )
-def base64(text, input, output):
+def base64(text: str, input, output) -> None:
     """Encrypt text or file using Base64."""
     manager = EncryptionManager(input_text=text, input_file=input)
     encrypted_data = manager.encrypt_base64()
@@ -65,7 +65,7 @@ def base64(text, input, output):
     help='Path to the output file',
 )
 @click.option('--key', required=True, help='Path to the RSA public key')
-def rsa(text, input, output, key):
+def rsa(text: str, input, output, key) -> None:
     """Encrypt text or file using RSA."""
     manager = EncryptionManager(
         input_text=text, input_file=input, key_file=key,

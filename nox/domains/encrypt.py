@@ -19,7 +19,7 @@ class EncryptionManager:
             with open(key_file, 'rb') as file:
                 self.key = file.read()
 
-    def encrypt_fernet(self):
+    def encrypt_fernet(self) -> bytes:
         fernet = Fernet(self.key)
         encrypted_data = fernet.encrypt(
             self.input_text.encode(
@@ -27,7 +27,7 @@ class EncryptionManager:
         ) if self.input_text else fernet.encrypt(self.input_file.read())
         return encrypted_data
 
-    def decrypt_fernet(self):
+    def decrypt_fernet(self) -> bytes:
         fernet = Fernet(self.key)
         decrypted_data = fernet.decrypt(
             self.input_text.encode(
@@ -35,21 +35,21 @@ class EncryptionManager:
         ) if self.input_text else fernet.decrypt(self.input_file.read())
         return decrypted_data
 
-    def encrypt_base64(self):
+    def encrypt_base64(self) -> bytes:
         encrypted_data = base64.b64encode(
             self.input_text.encode(
             ),
         ) if self.input_text else base64.b64encode(self.input_file.read())
         return encrypted_data
 
-    def decrypt_base64(self):
+    def decrypt_base64(self) -> bytes:
         decrypted_data = base64.b64decode(
             self.input_text.encode(
             ),
         ) if self.input_text else base64.b64decode(self.input_file.read())
         return decrypted_data
 
-    def encrypt_rsa(self):
+    def encrypt_rsa(self) -> bytes:
         public_key = rsa.PublicKey.load_pkcs1_openssl_pem(self.key)
         encrypted_data = rsa.encrypt(
             self.input_text.encode(
@@ -60,7 +60,7 @@ class EncryptionManager:
         )
         return encrypted_data
 
-    def decrypt_rsa(self):
+    def decrypt_rsa(self) -> bytes:
         private_key = rsa.PrivateKey.load_pkcs1(self.key)
         decrypted_data = rsa.decrypt(
             self.input_text.encode(

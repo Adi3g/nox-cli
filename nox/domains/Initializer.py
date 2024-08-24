@@ -7,14 +7,14 @@ import click
 
 
 class NoxInitializer:
-    def __init__(self, shell):
+    def __init__(self, shell: str) -> None:
         self.shell = shell
         self.completion_script_path = os.path.expanduser(
             f"~/.nox-complete-{shell}.sh",
         )
         self.rc_file = self.get_rc_file()
 
-    def get_rc_file(self):
+    def get_rc_file(self) -> str:
         """Get the appropriate rc file based on the shell."""
         if self.shell == 'bash':
             return os.path.expanduser('~/.bashrc')
@@ -25,7 +25,7 @@ class NoxInitializer:
         else:
             raise ValueError(f"Unsupported shell: {self.shell}")
 
-    def generate_completion_script(self):
+    def generate_completion_script(self) -> None:
         """Generate the auto-completion script for the specified shell."""
         if self.shell == 'fish':
             self.completion_script_path = os.path.expanduser(
@@ -42,7 +42,7 @@ class NoxInitializer:
             }",
         )
 
-    def update_rc_file(self):
+    def update_rc_file(self) -> None:
         """Update the rc file to source the completion script."""
         source_command = f"source {self.completion_script_path}"
 

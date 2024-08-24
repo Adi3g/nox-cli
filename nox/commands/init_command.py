@@ -10,7 +10,7 @@ from nox.domains.Initializer import NoxInitializer
     '--shell', type=click.Choice(['bash', 'zsh', 'fish']),
     required=True, help='Shell type for auto-completion setup',
 )
-def init(shell):
+def init(shell: str) -> None:
     """Initialize Nox CLI with auto-completion."""
     initializer = NoxInitializer(shell)
     initializer.generate_completion_script()
