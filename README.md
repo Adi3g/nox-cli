@@ -15,7 +15,12 @@ Nox is a Python CLI tool designed to automate and streamline various day-to-day 
   - [Secrets Management](#secrets-management)
   - [File and Directory Operations](#file-and-directory-operations)
   - [UUID Generation](#uuid-generation)
-  - [Weather Plugin](#weather-plugin)
+  - [Hashing Utilities](#hashing-utilities)
+  - [Environment Management](#environment-management)
+  - [Service Management](#service-management)
+  - [Template Generation](#template-generation)
+  - [Time and Date Utilities](#time-and-date-utilities)
+  - [Cloud Operations](#cloud-operations)
 - [Plugins](#plugins)
 - [Configuration](#configuration)
 - [Contributing](#contributing)
@@ -32,7 +37,12 @@ Nox is a Python CLI tool designed to automate and streamline various day-to-day 
 - **Secrets Management**: Store and retrieve secrets securely.
 - **File and Directory Operations**: Search for files, calculate directory sizes, and more.
 - **UUID Generation**: Generate UUIDs for various purposes.
-- **Extensible**: Easily add new commands and features through plugins.
+- **Hashing Utilities**: Hash text or files using algorithms like SHA-256, MD5, etc.
+- **Environment Management**: Manage environment variables by setting, getting, and listing them.
+- **Service Management**: Start, stop, and check the status of system services.
+- **Template Generation**: Generate boilerplate code for projects or components.
+- **Time and Date Utilities**: Work with dates and times, convert timezones, etc.
+- **Cloud Operations**: Deploy and manage applications on cloud providers.
 
 ## Usage
 
@@ -54,16 +64,16 @@ nox jwt verify --token your.jwt.token --key /path/to/public.pem
 
 ### Encryption and Decryption
 
-Encrypt a file using AES encryption:
+Encrypt a file using Base64 encryption:
 
 ```bash
-nox encrypt --input secret.txt --output secret.enc --key /path/to/key.pem --type AES
+nox encrypt base64 --input /path/to/file --output /path/to/output
 ```
 
 Decrypt a file:
 
 ```bash
-nox decrypt --input secret.enc --output secret.txt --key /path/to/key.pem
+nox decrypt base64 --input /path/to/encrypted_file --output /path/to/decrypted_file
 ```
 
 ### S3 File Management
@@ -74,44 +84,32 @@ List files in an S3 bucket:
 nox s3 list --bucket my-bucket --region us-west-2
 ```
 
-Upload a file to S3:
-
-```bash
-nox s3 add --file report.csv --bucket my-bucket --region us-west-2
-```
-
-Remove a file from S3:
-
-```bash
-nox s3 remove --file report.csv --bucket my-bucket --region us-west-2
-```
-
 ### Database Operations
 
-Run a SQL query on a PostgreSQL database:
+Backup a PostgreSQL database:
 
 ```bash
-nox db query --db "postgresql://user:password@localhost:5432/mydb" --query "SELECT * FROM users"
+nox db backup --db "postgresql://user:password@localhost:5432/mydb" --output /path/to/backup.sql
 ```
 
-Migrate a database:
+Restore a PostgreSQL database:
 
 ```bash
-nox db migrate --db "postgresql://user:password@localhost:5432/mydb" --migration migrations.sql
+nox db restore --db "postgresql://user:password@localhost:5432/mydb" --input /path/to/backup.sql
 ```
 
 ### Docker Management
 
-Build a Docker image:
+Clean up unused Docker containers, images, and volumes:
 
 ```bash
-nox docker build --tag my-image:latest --file Dockerfile
+nox docker clean
 ```
 
-Run a Docker container:
+Tail logs for a Docker container:
 
 ```bash
-nox docker run --tag my-image:latest --env .env --ports "8080:80"
+nox docker logs --container container_name
 ```
 
 ### Network Operations
@@ -122,12 +120,6 @@ Ping a host:
 nox net ping --host google.com
 ```
 
-Perform a traceroute:
-
-```bash
-nox net traceroute --host google.com
-```
-
 Perform a DNS lookup:
 
 ```bash
@@ -136,59 +128,111 @@ nox net dns --domain example.com
 
 ### Secrets Management
 
-Retrieve a secret from AWS Secrets Manager:
+Encrypt a secret:
 
 ```bash
-nox secrets get --name my-secret --region us-west-2
+nox secrets encrypt --secret "mysecret" --key /path/to/key.pem
 ```
 
-Store a new secret in AWS Secrets Manager:
+Decrypt a secret:
 
 ```bash
-nox secrets store --name my-secret --value "super-secret-value" --region us-west-2
+nox secrets decrypt --secret "encrypted_secret" --key /path/to/key.pem
 ```
 
 ### File and Directory Operations
 
-Search for files matching a pattern:
+Compress a directory:
 
 ```bash
-nox file search --path /path/to/directory --pattern "*.log"
+nox file compress --input /path/to/directory --output /path/to/output.zip --algorithm zip
 ```
 
-Calculate the size of a directory:
+Decompress a file:
 
 ```bash
-nox file size --path /path/to/directory
+nox file decompress --input /path/to/file.zip --output /path/to/output_directory
 ```
 
 ### UUID Generation
 
-Generate a new UUID4:
+Generate a new UUID:
 
 ```bash
-nox gen uuid4
+nox uuid generate
 ```
 
-### Weather Plugin
+### Hashing Utilities
 
-The Weather Plugin adds a command to check the current weather for a specified location.
-
-#### Usage
+Hash a text using SHA-256:
 
 ```bash
-nox weather "New York"
+nox hash --text "your text" --algorithm sha256
 ```
 
-This will output the current weather in New York, based on mock data:
+Hash a file:
 
 ```bash
-The current weather in New York is Sunny, 25°C.
+nox hash --file /path/to/file --algorithm sha256
 ```
 
-#### Note
+### Environment Management
 
-This is a mock implementation. You can extend it by integrating with a real weather API.
+Set environment variables from a file:
+
+```bash
+nox env set --file /path/to/.env
+```
+
+Retrieve the value of an environment variable:
+
+```bash
+nox env get --name ENV_VAR_NAME
+```
+
+### Service Management
+
+Start a system service:
+
+```bash
+nox service start --name docker
+```
+
+Check the status of a system service:
+
+```bash
+nox service status --name docker
+```
+
+### Template Generation
+
+Create a new project template:
+
+```bash
+nox template create --type flask-app --name my_project
+```
+
+### Time and Date Utilities
+
+Display the current date and time in ISO format:
+
+```bash
+nox time now --format iso
+```
+
+### Cloud Operations
+
+Deploy an application to a cloud provider:
+
+```bash
+nox cloud deploy --provider aws --config deploy_config.json
+```
+
+Check the status of a deployed application:
+
+```bash
+nox cloud status --provider aws --app my_app
+```
 
 ## Plugins
 
