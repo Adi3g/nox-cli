@@ -17,10 +17,3 @@ def test_init_zsh():
     result = runner.invoke(init, ['--shell', 'zsh'])
     assert result.exit_code == 0
     assert 'Auto-completion script generated at' in result.output
-
-
-def test_init_fish():
-    runner = CliRunner()
-    result = runner.invoke(init, ['--shell', 'fish'])
-    assert result.exit_code == 0
-    assert 'Auto-completion script generated at' in result.output

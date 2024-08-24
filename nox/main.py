@@ -4,6 +4,7 @@ import click
 
 from nox.commands import encrypt_commands
 from nox.commands import init_command
+from nox.commands import uuid_commands
 
 
 @click.group()
@@ -17,6 +18,7 @@ cli.add_command(init_command.init)
 
 # Register built-in commands
 cli.add_command(encrypt_commands.encrypt)
+cli.add_command(uuid_commands.gen)
 
 
 if __name__ == '__main__':
