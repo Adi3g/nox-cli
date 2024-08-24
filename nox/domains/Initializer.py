@@ -32,9 +32,9 @@ class NoxInitializer:
                 f"~/.config/fish/completions/nox.{self.shell}",
             )
 
-        command = f"python {
-            __file__
-        } completion --shell {self.shell} > {self.completion_script_path}"
+        command = f'env _NOX_COMPLETE={self.shell}_source nox > {
+            self.completion_script_path
+        }'
         subprocess.run(command, shell=True, check=True)
         click.echo(
             f"Auto-completion script generated at:{
