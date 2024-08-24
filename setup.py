@@ -14,9 +14,11 @@ setup(
         'cryptography',
         'boto3',
         'SQLAlchemy',
+        'rsa',
     ],
     entry_points='''
         [console_scripts]
         nox=nox.main:cli
     ''',
+    tests_require=['pytest', 'pytest-cov'],
 )
