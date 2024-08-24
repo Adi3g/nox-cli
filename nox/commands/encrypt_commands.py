@@ -23,6 +23,8 @@ def encrypt():
 @click.option('--key', required=True, help='Path to the encryption key')
 def fernet(text, input, output, key) -> None:
     """Encrypt text or file using Fernet."""
+    if not text and not input:
+        raise click.UsageError('You must provide either --text or --input.')
     manager = EncryptionManager(
         input_text=text, input_file=input, key_file=key,
     )
@@ -44,6 +46,8 @@ def fernet(text, input, output, key) -> None:
 )
 def base64(text: str, input, output) -> None:
     """Encrypt text or file using Base64."""
+    if not text and not input:
+        raise click.UsageError('You must provide either --text or --input.')
     manager = EncryptionManager(input_text=text, input_file=input)
     encrypted_data = manager.encrypt_base64()
     if output:
@@ -67,6 +71,8 @@ def base64(text: str, input, output) -> None:
 @click.option('--key', required=True, help='Path to the RSA public key')
 def rsa(text: str, input, output, key) -> None:
     """Encrypt text or file using RSA."""
+    if not text and not input:
+        raise click.UsageError('You must provide either --text or --input.')
     manager = EncryptionManager(
         input_text=text, input_file=input, key_file=key,
     )
