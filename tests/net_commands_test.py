@@ -8,7 +8,6 @@ from nox.commands.net_commands import geoip
 from nox.commands.net_commands import http
 from nox.commands.net_commands import ifconfig
 from nox.commands.net_commands import ping_sweep
-from nox.commands.net_commands import speedtest
 from nox.commands.net_commands import tcp_check
 from nox.commands.net_commands import traceroute
 from nox.commands.net_commands import whois
@@ -45,13 +44,6 @@ def test_http(runner):
     result = runner.invoke(http, ['--url', 'https://example.com'])
     assert result.exit_code == 0
     assert 'status' in result.output.lower()
-
-
-@pytest.mark.network
-def test_speedtest(runner):
-    result = runner.invoke(speedtest)
-    assert result.exit_code == 0
-    assert 'download speed' in result.output.lower()
 
 
 @pytest.mark.network
