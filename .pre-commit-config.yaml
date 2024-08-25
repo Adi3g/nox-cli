@@ -46,7 +46,7 @@ repos:
       rev: v1.11.1
       hooks:
           - id: mypy
-            additional_dependencies: [types-pyyaml]
+            additional_dependencies: [types-pyyaml, types-requests]
             exclude: ^testing/resources/
     - repo: local
       hooks:
@@ -56,3 +56,4 @@ repos:
             language: system
             pass_filenames: false
             stages: [commit]
+            args: ["-m", "not network"]

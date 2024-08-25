@@ -5,6 +5,7 @@ import click
 from nox.commands import encrypt_commands
 from nox.commands import init_command
 from nox.commands import jwt_commands
+from nox.commands import net_commands
 from nox.commands import uuid_commands
 
 
@@ -21,6 +22,7 @@ cli.add_command(init_command.init)
 cli.add_command(encrypt_commands.encrypt)
 cli.add_command(uuid_commands.gen)
 cli.add_command(jwt_commands.jwt)
+cli.add_command(net_commands.net)
 
 if __name__ == '__main__':
     cli()

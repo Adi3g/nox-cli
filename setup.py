@@ -15,10 +15,19 @@ setup(
         'boto3',
         'SQLAlchemy',
         'rsa',
+        'requests',
+        'python-whois',
+        'types-requests',
+        'speedtest-cli',
     ],
     entry_points='''
         [console_scripts]
         nox=nox.main:cli
     ''',
+    classifiers=[
+        'Programming Language :: Python :: 3',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
+    ],
     tests_require=['pytest', 'pytest-cov'],
 )
