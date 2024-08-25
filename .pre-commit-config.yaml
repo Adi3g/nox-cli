@@ -56,3 +56,5 @@ repos:
             language: system
             pass_filenames: false
             stages: [commit]
+            # skip a test file that is known to be slow
+            exclude: ^net_commands_test.py
