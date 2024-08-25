@@ -17,7 +17,7 @@ setup(
         'rsa',
         'requests',
         'python-whois',
-        'types-requests'
+        'types-requests',
         'speedtest-cli',
     ],
     entry_points='''

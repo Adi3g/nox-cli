@@ -3,6 +3,8 @@ from __future__ import annotations
 import ipaddress
 import socket
 import subprocess
+import threading
+import time
 
 import requests
 import speedtest
@@ -96,11 +98,63 @@ class NetworkManager:
             return f"HTTP request failed: {str(e)}"
 
     @staticmethod
+    def _run_speed_tests_with_progress(pbar: tqdm, result: dict) -> None:
+        """Run download and upload speed tests
+                while updating the same progress bar."""
+        try:
+            st = speedtest.Speedtest()
+            # Update the progress bar halfway before the download test
+            for _ in range(50):  # Assuming each tick is 0.1 second
+                time.sleep(0.1)
+                pbar.update(1)
+
+            # Start the download speed test
+            pbar.set_description('Testing download speed')
+            download_speed = st.download() / 1_000_000  # Convert to Mbps
+            result['download'] = download_speed
+
+            # Update the progress bar halfway before the upload test
+            for _ in range(50):  # Assuming each tick is 0.1 second
+                time.sleep(0.1)
+                pbar.update(1)
+
+            # Start the upload speed test
+            pbar.set_description('Testing upload speed')
+            upload_speed = st.upload() / 1_000_000  # Convert to Mbps
+            result['upload'] = upload_speed
+
+            pbar.set_description('Testing finished')
+        except Exception as e:
+            result['error'] = str(e)
+        finally:
+            pbar.n = pbar.total  # Ensure the progress bar completes
+            pbar.close()
+
+    @staticmethod
     def speedtest() -> str:
-        """Perform a speed test and return the download and upload speeds."""
-        st = speedtest.Speedtest()
-        download_speed = st.download() / 1_000_000  # Convert to Mbps
-        upload_speed = st.upload() / 1_000_000  # Convert to Mbps
+        """Perform a speed test and return the download
+            and upload speeds with a combined loading spinner."""
+        result: dict = {}
+        pbar = tqdm(
+            total=100, desc='Speedtest in progress',
+            bar_format='{l_bar}{bar} [ time left: {remaining} ]',
+        )
+
+        # Run the speed tests and progress bar in the same thread
+        test_thread = threading.Thread(
+            target=NetworkManager._run_speed_tests_with_progress, args=(
+                pbar, result,
+            ),
+        )
+        test_thread.start()
+        test_thread.join()
+
+        if 'error' in result:
+            return f"Speedtest failed: {result['error']}"
+
+        download_speed = result.get('download', 0)
+        upload_speed = result.get('upload', 0)
+
         return f"Download speed: {download_speed:.2f} Mbps\n\
                 Upload speed: {upload_speed:.2f} Mbps"
 
