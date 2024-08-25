@@ -31,5 +31,5 @@ jobs:
       run: |
         pip install pytest
         pre-commit run --all-files
-
-  #TODO! Optional: Add additional jobs like build, security scans, etc.
+  #TODO! Build job
+  #TODO! Security scans job
