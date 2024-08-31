@@ -19,6 +19,8 @@ setup(
         'python-whois',
         'types-requests',
         'speedtest-cli',
+        'docker',
+
     ],
     entry_points='''
         [console_scripts]
