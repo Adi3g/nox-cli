@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import click
 
+from nox.commands import db_commands
 from nox.commands import encrypt_commands
 from nox.commands import hash_commands
 from nox.commands import init_command
@@ -29,6 +30,7 @@ cli.add_command(net_commands.net)
 cli.add_command(s3_commands.s3)
 cli.add_command(hash_commands.hash)
 cli.add_command(secret_commands.secrets)
+cli.add_command(db_commands.db)
 
 if __name__ == '__main__':
     cli()
