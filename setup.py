@@ -20,7 +20,7 @@ setup(
         'types-requests',
         'speedtest-cli',
         'docker',
-
+        'python-dotenv',
     ],
     entry_points='''
         [console_scripts]
