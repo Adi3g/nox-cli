@@ -4,6 +4,7 @@ import click
 
 from nox.commands import db_commands
 from nox.commands import encrypt_commands
+from nox.commands import env_commands
 from nox.commands import hash_commands
 from nox.commands import init_command
 from nox.commands import jwt_commands
@@ -31,6 +32,7 @@ cli.add_command(s3_commands.s3)
 cli.add_command(hash_commands.hash)
 cli.add_command(secret_commands.secrets)
 cli.add_command(db_commands.db)
+cli.add_command(env_commands.env)
 
 if __name__ == '__main__':
     cli()
