@@ -19,6 +19,7 @@ setup(
         'python-whois',
         'types-requests',
         'speedtest-cli',
+        'docker',
         'python-dotenv',
     ],
     entry_points='''

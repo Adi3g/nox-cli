@@ -1,82 +1,83 @@
 from __future__ import annotations
 
-import docker
-from docker.errors import APIError
-from docker.errors import NotFound
+import click
+
+from nox.domains.docker_manager import DockerManager
 
 
-class DockerManager:
-    def __init__(self):
-        self.client = docker.from_env()
+@click.group()
+def docker():
+    """Docker management commands."""
+    pass
 
-    def build_image(self, path: str, tag: str):
-        """Build a Docker image from a Dockerfile."""
-        try:
-            image, _ = self.client.images.build(path=path, tag=tag)
-            print(f"Image {tag} built successfully.")
-            return image
-        except APIError as e:
-            print(f"Error building image: {e}")
 
-    def run_container(self, image: str, name: str, ports: dict):
-        """Run a Docker container from an image."""
-        try:
-            container = self.client.containers.run(
-                image, name=name, ports=ports, detach=True,
-            )
-            print(f"Container {name} started from image {image}.")
-            return container
-        except APIError as e:
-            print(f"Error running container: {e}")
+@click.command()
+@click.option('--path', required=True, help='Path to the Dockerfile or context directory')
+@click.option('--tag', required=True, help='Tag for the Docker image')
+def build(path, tag):
+    """Build a Docker image."""
+    manager = DockerManager()
+    manager.build_image(path, tag)
 
-    def list_containers(self, all_containers: bool = False):
-        """List Docker containers."""
-        try:
-            containers = self.client.containers.list(all=all_containers)
-            for container in containers:
-                print(
-                    f"{
-                        container.id[:12]
-                    } - {container.name} - '{container.status}",
-                )
-            return containers
-        except APIError as e:
-            print(f"Error listing containers: {e}")
 
-    def stop_container(self, name: str):
-        """Stop a running Docker container."""
-        try:
-            container = self.client.containers.get(name)
-            container.stop()
-            print(f"Container {name} stopped.")
-        except NotFound:
-            print(f"Container {name} not found.")
-        except APIError as e:
-            print(f"Error stopping container: {e}")
+@click.command()
+@click.option('--image', required=True, help='Docker image to run')
+@click.option('--name', required=True, help='Name for the running container')
+@click.option('--port', multiple=True, type=(int, int), help='Port mappings (host, container)')
+@click.option('--env', multiple=True, type=(str, str), help='Environment variables (KEY, VALUE)')
+def run(image, name, port, env):
+    """Run a Docker container."""
+    ports = {f"{p[1]}/tcp": p[0] for p in port}
+    env_vars = {e[0]: e[1] for e in env}
+    manager = DockerManager()
+    manager.run_container(image, name, ports, env_vars)
 
-    def remove_container(self, name: str):
-        """Remove a Docker container."""
-        try:
-            container = self.client.containers.get(name)
-            container.remove()
-            print(f"Container {name} removed.")
-        except NotFound:
-            print(f"Container {name} not found.")
-        except APIError as e:
-            print(f"Error removing container: {e}")
 
-    def pull_image(self, image: str):
-        """Pull a Docker image from Docker Hub."""
-        try:
-            self.client.images.pull(image)
-            print(f"Image {image} pulled successfully.")
-        except APIError as e:
-            print(f"Error pulling image: {e}")
+@click.command()
+@click.option('--all', is_flag=True, help='List all containers, including stopped')
+def list(all):
+    """List Docker containers."""
+    manager = DockerManager()
+    manager.list_containers(all)
 
-    def push_image(self, image: str):
-        """Push a Docker image to Docker Hub."""
-        try:
-            self.client.images.push(image)
-            print(f"Image {image} pushed successfully.")
-        except APIError as e:
-            print(f"Error pushing image: {e}")
+
+@click.command()
+@click.option('--name', required=True, help='Name or ID of the container to stop')
+def stop(name):
+    """Stop a running Docker container."""
+    manager = DockerManager()
+    manager.stop_container(name)
+
+
+@click.command()
+@click.option('--name', required=True, help='Name or ID of the container to remove')
+def remove(name):
+    """Remove a Docker container."""
+    manager = DockerManager()
+    manager.remove_container(name)
+
+
+@click.command()
+@click.option('--image', required=True, help='Docker image to pull')
+def pull(image):
+    """Pull a Docker image from a registry."""
+    manager = DockerManager()
+    manager.pull_image(image)
+
+
+@click.command()
+@click.option('--image', required=True, help='Docker image to push')
+def push(image):
+    """Push a Docker image to a registry."""
+    manager = DockerManager()
+    manager.push_image(image)
+
+
+# Add commands to the docker group
+docker.add_command(build)
+docker.add_command(run)
+docker.add_command(list, name='list')
+docker.add_command(stop)
+docker.add_command(remove)
+docker.add_command(pull)
+docker.add_command(push)
