@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import click
 
+from nox.commands import datetime_commands
 from nox.commands import db_commands
 from nox.commands import docker_commands
 from nox.commands import encrypt_commands
@@ -35,6 +36,7 @@ cli.add_command(secret_commands.secrets)
 cli.add_command(docker_commands.docker)
 cli.add_command(db_commands.db)
 cli.add_command(env_commands.env)
+cli.add_command(datetime_commands.datetime)
 
 if __name__ == '__main__':
     cli()

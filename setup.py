@@ -21,6 +21,8 @@ setup(
         'speedtest-cli',
         'docker',
         'python-dotenv',
+        'pytz',
+        'types-pytz',
     ],
     entry_points='''
         [console_scripts]
