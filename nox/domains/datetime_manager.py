@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from datetime import timedelta
 
-import pytz as pytz
+import pytz
 from dateutil import parser
 
 
@@ -47,7 +47,6 @@ class DateTimeManager:
             start = parser.parse(start_date)
             end = parser.parse(end_date)
             difference = end - start
-            return f"Difference: {difference.days} days, \
-                {difference.seconds // 3600} hours, {(difference.seconds // 60) % 60} minutes"
+            return f"Difference: {difference.days} days, {difference.seconds // 3600} hours, {(difference.seconds // 60) % 60} minutes"
         except ValueError as e:
             return f"Error: {str(e)}"
