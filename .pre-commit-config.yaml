@@ -51,6 +51,7 @@ repos:
             - types-requests
             - types-pytz
             - types-python-dateutil
+            - types-redis
           exclude: ^testing/resources/
     - repo: local
       hooks:
