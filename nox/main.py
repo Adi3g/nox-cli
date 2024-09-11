@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import click
 
+from nox.commands import data_processing_commands
 from nox.commands import datetime_commands
 from nox.commands import db_commands
 from nox.commands import docker_commands
@@ -14,7 +15,6 @@ from nox.commands import net_commands
 from nox.commands import s3_commands
 from nox.commands import secret_commands
 from nox.commands import uuid_commands
-from nox.commands.data_processing_commands import data
 
 
 @click.group()
@@ -38,7 +38,7 @@ cli.add_command(docker_commands.docker)
 cli.add_command(db_commands.db)
 cli.add_command(env_commands.env)
 cli.add_command(datetime_commands.datetime)
-cli.add_command(data)
+cli.add_command(data_processing_commands.data)
 
 if __name__ == '__main__':
     cli()
