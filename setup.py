@@ -23,6 +23,7 @@ setup(
         'python-dotenv',
         'pytz',
         'types-pytz',
+        'confluent-kafka',
     ],
     entry_points='''
         [console_scripts]
