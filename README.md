@@ -24,7 +24,6 @@ Nox is a Python CLI tool designed to automate and streamline various day-to-day 
   - [Time and Date Utilities](#time-and-date-utilities)
   - [Cloud Operations](#cloud-operations)
 - [Plugins](#plugins)
-- [Configuration](#configuration)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -269,28 +268,6 @@ plugin = MyPlugin()
 
 To load plugins distributed as separate packages, ensure they are installed in the same environment as Nox, and they will be discovered automatically.
 
-## Configuration
-
-Nox can be configured via a `.noxconfig` file or environment variables. Below is an example `.noxconfig` file:
-
-```json
-{
-  "jwt": {
-    "default_env": "dev"
-  },
-  "s3": {
-    "default_region": "us-west-2"
-  },
-  "db": {
-    "default_connection_string": "postgresql://user:password@localhost:5432/mydb"
-  },
-  "secrets": {
-    "default_region": "us-west-2"
-  }
-}
-```
-
-Place this file in your project's root directory, and Nox will automatically use these settings.
 
 ## Contributing
 
