@@ -1,4 +1,6 @@
-<div style="text-align:center"><img src="https://github.com/user-attachments/assets/8f5332c5-0e72-4af1-ad1f-e376d0a7877e" /></div>
+<p align="center">
+  <a href="https://nestjs.com/" target="blank"><img src="https://github.com/user-attachments/assets/981464b6-d547-480c-b889-3a72ccc9ba0e" width="120" alt="Nox Logo" /></a>
+</p>
 
 Nox is a Python CLI tool designed to automate and streamline various day-to-day tasks commonly performed by software engineers. It provides functionalities like JWT management, encryption/decryption, interaction with AWS S3, database operations, Docker management, and more.
 
