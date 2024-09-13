@@ -16,6 +16,7 @@ pycodestyle==2.12.1
 pyflakes==3.2.0
 PyJWT==2.9.0
 python-dotenv==1.0.1
+redis==5.0.8
 requests==2.32.3
 rsa==4.9
 speedtest-cli==2.1.3
