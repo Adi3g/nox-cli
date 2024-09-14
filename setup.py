@@ -36,6 +36,10 @@ setup(
         'pytz',
         'types-pytz',
         'confluent-kafka',
+        'tqdm',
+        'whois',
+        'redis',
+
     ],
     entry_points='''
         [console_scripts]
