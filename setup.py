@@ -5,7 +5,12 @@ from setuptools import setup
 
 setup(
     name='nox-cli',
-    version='0.1.0',
+    use_scm_version=True,
+    setup_requires=['setuptools-scm'],
+    description='A powerful CLI tool for various automation tasks.',
+    author='Adib Grouz',
+    author_email='contact@adib-grouz.com',
+    url='https://github.com/Adi3g/nox-cli',
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
