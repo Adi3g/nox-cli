@@ -1,7 +1,12 @@
 from __future__ import annotations
 
+import pathlib
+
 from setuptools import find_packages
 from setuptools import setup
+
+HERE = pathlib.Path(__file__).parent
+README = (HERE / 'README.md').read_text()
 
 setup(
     name='nox-cli',
@@ -13,6 +18,8 @@ setup(
     url='https://github.com/Adi3g/nox-cli',
     packages=find_packages(),
     include_package_data=True,
+    long_description=README,
+    long_description_content_type='text/markdown',
     install_requires=[
         'click',
         'PyJWT',
