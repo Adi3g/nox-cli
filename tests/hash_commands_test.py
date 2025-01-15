@@ -30,7 +30,7 @@ def test_generate_hash_sha256(hash_manager, tmp_path):
 def test_verify_hash(hash_manager, tmp_path):
     test_file = tmp_path / 'test.txt'
     test_file.write_text('This is a test file.')
-    assert hash_manager.verify_hash(
+    assert hash_manager.verify_hash_from_file(
         str(
             test_file,
         ), '3de8f8b0dc94b8c2230fab9ec0ba0506', 'md5',
