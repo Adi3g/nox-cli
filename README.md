@@ -1,4 +1,6 @@
-# Nox
+<p align="center">
+  <a href="https://nestjs.com/" target="blank"><img src="https://github.com/user-attachments/assets/981464b6-d547-480c-b889-3a72ccc9ba0e" width="120" alt="Nox Logo" /></a>
+</p>
 
 Nox is a Python CLI tool designed to automate and streamline various day-to-day tasks commonly performed by software engineers. It provides functionalities like JWT management, encryption/decryption, interaction with AWS S3, database operations, Docker management, and more.
 
@@ -22,7 +24,6 @@ Nox is a Python CLI tool designed to automate and streamline various day-to-day 
   - [Time and Date Utilities](#time-and-date-utilities)
   - [Cloud Operations](#cloud-operations)
 - [Plugins](#plugins)
-- [Configuration](#configuration)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -43,6 +44,15 @@ Nox is a Python CLI tool designed to automate and streamline various day-to-day 
 - **Template Generation**: Generate boilerplate code for projects or components.
 - **Time and Date Utilities**: Work with dates and times, convert timezones, etc.
 - **Cloud Operations**: Deploy and manage applications on cloud providers.
+
+## [![Repography logo](https://images.repography.com/logo.svg)](https://repography.com) / Recent activity [![Time period](https://images.repography.com/54868595/Adi3g/nox-cli/recent-activity/0bdCu61BTSZLmgTWnKjefwC3r7W3VPhJTZ_NE2VYbq0/8GKWUmVqldQq9KP597PaNdFZ4EIIiRWfHwIk0AvTaXg_badge.svg)](https://repography.com)
+[![Timeline graph](https://images.repography.com/54868595/Adi3g/nox-cli/recent-activity/0bdCu61BTSZLmgTWnKjefwC3r7W3VPhJTZ_NE2VYbq0/8GKWUmVqldQq9KP597PaNdFZ4EIIiRWfHwIk0AvTaXg_timeline.svg)](https://github.com/Adi3g/nox-cli/commits)
+[![Issue status graph](https://images.repography.com/54868595/Adi3g/nox-cli/recent-activity/0bdCu61BTSZLmgTWnKjefwC3r7W3VPhJTZ_NE2VYbq0/8GKWUmVqldQq9KP597PaNdFZ4EIIiRWfHwIk0AvTaXg_issues.svg)](https://github.com/Adi3g/nox-cli/issues)
+[![Pull request status graph](https://images.repography.com/54868595/Adi3g/nox-cli/recent-activity/0bdCu61BTSZLmgTWnKjefwC3r7W3VPhJTZ_NE2VYbq0/8GKWUmVqldQq9KP597PaNdFZ4EIIiRWfHwIk0AvTaXg_prs.svg)](https://github.com/Adi3g/nox-cli/pulls)
+[![Trending topics](https://images.repography.com/54868595/Adi3g/nox-cli/recent-activity/0bdCu61BTSZLmgTWnKjefwC3r7W3VPhJTZ_NE2VYbq0/8GKWUmVqldQq9KP597PaNdFZ4EIIiRWfHwIk0AvTaXg_words.svg)](https://github.com/Adi3g/nox-cli/commits)
+[![Top contributors](https://images.repography.com/54868595/Adi3g/nox-cli/recent-activity/0bdCu61BTSZLmgTWnKjefwC3r7W3VPhJTZ_NE2VYbq0/8GKWUmVqldQq9KP597PaNdFZ4EIIiRWfHwIk0AvTaXg_users.svg)](https://github.com/Adi3g/nox-cli/graphs/contributors)
+[![Activity map](https://images.repography.com/54868595/Adi3g/nox-cli/recent-activity/0bdCu61BTSZLmgTWnKjefwC3r7W3VPhJTZ_NE2VYbq0/8GKWUmVqldQq9KP597PaNdFZ4EIIiRWfHwIk0AvTaXg_map.svg)](https://github.com/Adi3g/nox-cli/commits)
+
 
 ## Usage
 
@@ -267,28 +277,6 @@ plugin = MyPlugin()
 
 To load plugins distributed as separate packages, ensure they are installed in the same environment as Nox, and they will be discovered automatically.
 
-## Configuration
-
-Nox can be configured via a `.noxconfig` file or environment variables. Below is an example `.noxconfig` file:
-
-```json
-{
-  "jwt": {
-    "default_env": "dev"
-  },
-  "s3": {
-    "default_region": "us-west-2"
-  },
-  "db": {
-    "default_connection_string": "postgresql://user:password@localhost:5432/mydb"
-  },
-  "secrets": {
-    "default_region": "us-west-2"
-  }
-}
-```
-
-Place this file in your project's root directory, and Nox will automatically use these settings.
 
 ## Contributing
 

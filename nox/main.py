@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import click
 
+from nox.commands import datetime_commands
 from nox.commands import db_commands
 from nox.commands import docker_commands
 from nox.commands import encrypt_commands
@@ -10,6 +11,7 @@ from nox.commands import hash_commands
 from nox.commands import init_command
 from nox.commands import jwt_commands
 from nox.commands import net_commands
+from nox.commands import redis_commands
 from nox.commands import s3_commands
 from nox.commands import secret_commands
 from nox.commands import uuid_commands
@@ -35,6 +37,8 @@ cli.add_command(secret_commands.secrets)
 cli.add_command(docker_commands.docker)
 cli.add_command(db_commands.db)
 cli.add_command(env_commands.env)
+cli.add_command(datetime_commands.datetime)
+cli.add_command(redis_commands.redis)
 
 if __name__ == '__main__':
     cli()

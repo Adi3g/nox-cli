@@ -1,13 +1,25 @@
 from __future__ import annotations
 
+import pathlib
+
 from setuptools import find_packages
 from setuptools import setup
 
+HERE = pathlib.Path(__file__).parent
+README = (HERE / 'README.md').read_text()
+
 setup(
     name='nox-cli',
-    version='0.1.0',
+    use_scm_version=True,
+    setup_requires=['setuptools-scm'],
+    description='A powerful CLI tool for various automation tasks.',
+    author='Adib Grouz',
+    author_email='contact@adib-grouz.com',
+    url='https://github.com/Adi3g/nox-cli',
     packages=find_packages(),
     include_package_data=True,
+    long_description=README,
+    long_description_content_type='text/markdown',
     install_requires=[
         'click',
         'PyJWT',
@@ -22,6 +34,12 @@ setup(
         'docker',
         'python-dotenv',
         'moto',
+        'pytz',
+        'types-pytz',
+        'confluent-kafka',
+        'tqdm',
+        'whois',
+        'redis',
     ],
     entry_points='''
         [console_scripts]
