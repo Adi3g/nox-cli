@@ -61,7 +61,7 @@ def generate(file_path, text_to_hash, algorithm):
 def verify(file_path, expected_hash, algorithm):
     """Verify a file's hash against the expected hash."""
     manager = HashManager()
-    if manager.verify_hash(file_path, expected_hash, algorithm):
+    if manager.verify_hash_from_file(file_path, expected_hash, algorithm):
         click.echo(f"Hash matches for {file_path}.")
     else:
         click.echo(f"Hash does not match for {file_path}.")

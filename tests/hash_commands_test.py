@@ -21,7 +21,7 @@ def test_generate_hash_md5(hash_manager, tmp_path):
 def test_generate_hash_sha256(hash_manager, tmp_path):
     test_file = tmp_path / 'test.txt'
     test_file.write_text('This is a test file.')
-    file_hash = hash_manager.generate_hash(str(test_file), algorithm='sha256')
+    file_hash = hash_manager.generate_hash_from_file(str(test_file), algorithm='sha256')
     assert file_hash == \
         'f29bc64a9d3732b4b9035125fdb3285f5b6455778edca72414671e0ca3b2e0de', \
         'SHA256 hash mismatch.'

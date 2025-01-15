@@ -32,10 +32,10 @@ class HashManager:
             print(f"Error generating hash: {e}")
             return ''
 
-    def verify_hash(
+    def verify_hash_from_file(
         self, file_path: str,
         expected_hash: str, algorithm: str = 'md5',
     ) -> bool:
         """Verify the hash of the given file against the expected hash."""
-        actual_hash = self.generate_hash(file_path, algorithm)
+        actual_hash = self.generate_hash_from_file(file_path, algorithm)
         return actual_hash == expected_hash
