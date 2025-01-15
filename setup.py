@@ -33,13 +33,13 @@ setup(
         'speedtest-cli',
         'docker',
         'python-dotenv',
+        'moto',
         'pytz',
         'types-pytz',
         'confluent-kafka',
         'tqdm',
         'whois',
         'redis',
-
     ],
     entry_points='''
         [console_scripts]

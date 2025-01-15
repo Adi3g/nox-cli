@@ -13,20 +13,36 @@ def hash():
 
 @click.command()
 @click.option(
-    '--file', 'file_path', required=True,
+    '--file', 'file_path',
     help='Path to the file to hash',
+)
+@click.option(
+    '--text', 'text_to_hash',
+    help='Text to hash',
 )
 @click.option(
     '--algorithm', default='md5',
     type=click.Choice(['md5', 'sha256', 'sha512']),
     help='Hashing algorithm to use',
 )
-def generate(file_path, algorithm):
-    """Generate a hash for a file."""
+def generate(file_path, text_to_hash, algorithm):
+    """Generate a hash for a file or a text."""
     manager = HashManager()
-    file_hash = manager.generate_hash(file_path, algorithm)
-    if file_hash:
-        click.echo(f"{algorithm.upper()} hash for {file_path}: {file_hash}")
+
+    if file_path and text_to_hash:
+        click.echo('Error: Please provide either --file or --text, not both.')
+        return
+
+    if file_path:
+        file_hash = manager.generate_hash_from_file(file_path, algorithm)
+        if file_hash:
+            click.echo(f"{algorithm.upper()} hash for file {file_path}: {file_hash}")
+    elif text_to_hash:
+        text_hash = manager.generate_hash_from_text(text_to_hash, algorithm)
+        if text_hash:
+            click.echo(f"{algorithm.upper()} hash for text: {text_hash}")
+    else:
+        click.echo('Error: Please provide either --file or --text.')
 
 
 @click.command()
@@ -46,7 +62,7 @@ def generate(file_path, algorithm):
 def verify(file_path, expected_hash, algorithm):
     """Verify a file's hash against the expected hash."""
     manager = HashManager()
-    if manager.verify_hash(file_path, expected_hash, algorithm):
+    if manager.verify_hash_from_file(file_path, expected_hash, algorithm):
         click.echo(f"Hash matches for {file_path}.")
     else:
         click.echo(f"Hash does not match for {file_path}.")
