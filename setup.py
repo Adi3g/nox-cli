@@ -21,6 +21,7 @@ setup(
         'speedtest-cli',
         'docker',
         'python-dotenv',
+        'moto',
     ],
     entry_points='''
         [console_scripts]

@@ -13,7 +13,7 @@ def hash_manager():
 def test_generate_hash_md5(hash_manager, tmp_path):
     test_file = tmp_path / 'test.txt'
     test_file.write_text('This is a test file.')
-    file_hash = hash_manager.generate_hash(str(test_file), algorithm='md5')
+    file_hash = hash_manager.generate_hash_from_file(str(test_file), algorithm='md5')
     assert file_hash == '3de8f8b0dc94b8c2230fab9ec0ba0506', \
         'MD5 hash mismatch.'
 
