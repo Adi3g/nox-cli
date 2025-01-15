@@ -30,7 +30,7 @@ def generate(file_path, text_to_hash, algorithm):
     manager = HashManager()
 
     if file_path and text_to_hash:
-        click.echo("Error: Please provide either --file or --text, not both.")
+        click.echo('Error: Please provide either --file or --text, not both.')
         return
 
     if file_path:
@@ -42,7 +42,8 @@ def generate(file_path, text_to_hash, algorithm):
         if text_hash:
             click.echo(f"{algorithm.upper()} hash for text: {text_hash}")
     else:
-        click.echo("Error: Please provide either --file or --text.")
+        click.echo('Error: Please provide either --file or --text.')
+
 
 @click.command()
 @click.option(
