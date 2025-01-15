@@ -4,7 +4,7 @@ import hashlib
 
 
 class HashManager:
-    def generate_hash(self, file_path: str, algorithm: str = 'md5') -> str:
+    def generate_hash_from_file(self, file_path: str, algorithm: str = 'md5') -> str:
         """Generate a hash for the given file using the specified algorithm."""
         hash_func = getattr(hashlib, algorithm)()
         try:
@@ -14,6 +14,19 @@ class HashManager:
             return hash_func.hexdigest()
         except FileNotFoundError:
             print(f"Error: File {file_path} not found.")
+            return ''
+        except Exception as e:
+            print(f"Error generating hash: {e}")
+            return ''
+
+    def generate_hash_from_text(self, text: str, algorithm: str = 'md5') -> str:
+        """Generate a hash for the given text using the specified algorithm."""
+        try:
+            hash_func = getattr(hashlib, algorithm)()
+            hash_func.update(text.encode('utf-8'))
+            return hash_func.hexdigest()
+        except AttributeError:
+            print(f"Error: Algorithm {algorithm} is not supported.")
             return ''
         except Exception as e:
             print(f"Error generating hash: {e}")
